@@ -2,13 +2,16 @@
 dataShare
 
 Usage:
-  dataShare hello | bye | Init
+  dataShare bye | Init
   dataShare -h | --help
   dataShare --version
+  dataShare add <files>...
+  dataShare commit <message>
 
 Options:
   -h --help                         Show this screen.
   --version                         Show version.
+
 
 Examples:
   dataShare hello
@@ -30,7 +33,7 @@ def main():
     """Main CLI entrypoint."""
     import commands
     options = docopt(__doc__)
-    print 'options', options
+
     # Here we'll try to dynamically match the command the user is trying to run
     # with a pre-defined command class we've already created.
     for (k, v) in options.items():

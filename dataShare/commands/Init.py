@@ -1,4 +1,4 @@
-"""The hello command."""
+"""The init command."""
 
 
 from json import dumps
@@ -14,11 +14,11 @@ class init(Base):
 
 
     def initializeConfig(self):
-        configVals = ['Cloud Data Storage', 'Local Data Folder', 'Shallow Depth',
-                      'Modification Identification Method', 'Supported Data Types',
-                      'CacheDir']
+        configVals = ['cloud data storage', 'local data folder', 'shallow depth',
+                      'modification identification method', 'supported data types',
+                      'cachedir', 'baseurlpath']
         toSkip = [5]
-        defaultVals = ['S3', 'Data', '3', 'Time', "csv, tsv", ".dataShareCache"]
+        defaultVals = ['S3', 'Data', '3', 'Time', "csv, tsv", ".dataShareCache", ""]
         print('Setting up the config file')
         print('To skip press enter')
         config = configparser.ConfigParser()
@@ -43,16 +43,16 @@ class init(Base):
                 git.write(toAdd)
 
     def initializeCache(self, cacheDir):
-        if os.path.exists(directory):
+        if os.path.exists(cacheDir):
             #folder already exists deleting it to start new
             shutil.rmtree(cacheDir)
         os.makedirs(cacheDir)
         self.addToGitIgnore(cacheDir)
 
-    def initializeDataTrackingFile(self, trackingFile):
+    #def initializeDataTrackingFile(self, trackingFile):
 
 
     def run(self):
-        config = initializeConfig()
+        config = self.initializeConfig()
         print('Setting up the cache file')
-        self.initializeCache(config['CacheDir'])
+        self.initializeCache(config._sections['DATA SHARE']['cachedir'])
